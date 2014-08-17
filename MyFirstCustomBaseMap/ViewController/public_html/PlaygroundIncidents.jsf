@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+    <af:document title="PlaygroundIncidents.jsf" id="d1">
+        <af:form id="f1">
+            <af:panelGridLayout id="pgl1">
+                <af:gridRow height="50px" id="gr2">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                        <!-- Header -->
+                        <af:panelHeader id="ph" text="Playground Incident Statistics"/>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow height="100%" id="gr1">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc2">
+                        <dvt:thematicMap id="tm1b" basemap="playgroundBaseMap" source="/playground-map.xml"
+                                         summary="Custom Base Map of Playground - with incident occurrences">
+                            <dvt:areaLayer layer="layer1" id="ala1">
+                                <dvt:pointDataLayer id="pdl1a" selectionMode="single"
+                                                    value="#{viewScope.playgroundIncidentsStatistician.playgroundIncidents}"
+                                                    var="row" animationOnDataChange="alphaFade" varStatus="rowStatus">
+                                    <dvt:pointLocation id="pla1" pointName="#{row.location}" type="pointName">
+                                        <dvt:marker id="ma1" shape="square" opacity="1" gradientEffect="none"
+                                                    fillColor="#ff0084" scaleX="2" scaleY="#{row.occurrences}"
+                                                    shortDesc="#{row.occurrences} incidents. #{row.comment}"></dvt:marker>
+                                    </dvt:pointLocation>
+                                </dvt:pointDataLayer>
+                            </dvt:areaLayer>
+                        </dvt:thematicMap>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>
